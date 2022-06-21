@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.spring.javagreenS.dao.ShopDAO">
+
+  <select id="getGoods1" resultType="String">
+    select product1 from goods1 order by product1;
+  </select>
+  
+  <select id="getGoods2" resultType="String">
+    select product2 from goods2 where product1 = #{product1} order by product2;
+  </select>
+   
+  <select id="getGoods3" resultType="String">
+    select product3 from goods3 where product1 = #{product1} and product2 = #{product2} order by product3;
+  </select>
+     
+  <select id="getProductList" resultType="com.spring.javagreenS.vo.ProductVO">
+    <if test="product == ''">
+      select * from product order by product;
+    </if>
+    <if test="product != ''">
+      select * from product where product like concat('%',#{product},'%') order by product;
+    </if>
+  </select>
+<!-- 
+  <insert id="setProductInputOk">
+    insert into product values (#{vo.idx}, #{vo.product1}, #{vo.product2}, #{vo.product3}, #{vo.product}, #{vo.price}, #{vo.title}, #{vo.content});
+  </insert> 
+   -->
+</mapper>
